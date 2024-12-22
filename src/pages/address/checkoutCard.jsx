@@ -38,7 +38,7 @@ export const CheckoutCard = () => {
       key: "rzp_test_4hPkeR34PzPm3M",
       amount: Number(priceDetails.totalPrice) * 100,
       currency: "INR",
-      name: "Mytalorzone",
+      name: "ATIRE",
       description: "Thank you for shopping with us",
       handler: function () {
         toast.success(`Payment of Rs. ${priceDetails.totalPrice} is Succesful`);
