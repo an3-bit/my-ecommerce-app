@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { logo } from "../../assets";
-import "./navbar.css";
 import { useAuth } from "../../context/authContext";
 import { useFilters } from "../../context/filterContext";
 import { useCart } from "../../context/cartContext";
 import { useWishlist } from "../../context/wishlistContext";
+import "./navbar.css";
+
 
 export const NavBar = () => {
   const { token } = useAuth();
@@ -29,27 +29,23 @@ export const NavBar = () => {
         }}
       >
         Sign up and get exclusive offers.
-        <i onClick={() => setIsVisible(false)} class="fa-solid fa-xmark"></i>
+        <i onClick={() => setIsVisible(false)} className="fa-solid fa-xmark"></i>
       </div>
       <div className="nav">
         <div className="navbar">
-          <div className="nav-options">
-            <p className="welcome-message">Welcome to Mytalorzone by Sahiba</p>
-            <p>
-              <NavLink style={activeStyle} to="/">
-                HOME
-              </NavLink>
-            </p>
-            <p>
-              <NavLink style={activeStyle} to="/products">
-                SHOP
-              </NavLink>
-            </p>
-          </div>
-          <div className="nav-navigate">
-            <div onClick={() => navigate("/products")}>
+          <p className="welcome-message">
+            Welcome to <br /> Mytalorzone by Sahiba
+          </p>
+          <div className="search-and-links">
+            <NavLink style={activeStyle} to="/">
+              Home
+            </NavLink>
+            <NavLink style={activeStyle} to="/products">
+              Shop
+            </NavLink>
+            <div className="search-bar">
               <i
-                class="fa-solid fa-magnifying-glass"
+                className="fa-solid fa-magnifying-glass"
                 style={{ color: "#98999a" }}
               ></i>
               <input
@@ -63,15 +59,19 @@ export const NavBar = () => {
                 }}
               />
             </div>
+          </div>
+          <div className="nav-navigate">
             <i
               onClick={() => navigate("/cart")}
-              class="fa-solid fa-cart-shopping"
+              className="fa-solid fa-cart-shopping"
             ></i>
-            {cart.length > 0 && <p className="badge">{token && cart.length}</p>}
+            {cart.length > 0 && (
+              <p className="badge">{token && cart.length}</p>
+            )}
 
             <i
               onClick={() => navigate("/wishlist")}
-              class="fa-solid fa-heart"
+              className="fa-solid fa-heart"
             ></i>
             {wishlist.length > 0 && (
               <p className="badge">{token && wishlist.length}</p>
@@ -82,31 +82,17 @@ export const NavBar = () => {
                 className="login-icon"
                 onClick={() => navigate("/profile")}
               >
-                <i class="fa-regular fa-user"></i>
+                <i className="fa-regular fa-user"></i>
               </button>
             ) : (
-              <button className="login-icon" onClick={() => navigate("/login")}>
-                <i class="fa-regular fa-user"></i>
+              <button
+                className="login-icon"
+                onClick={() => navigate("/login")}
+              >
+                <i className="fa-regular fa-user"></i>
               </button>
             )}
           </div>
-        </div>
-
-        <div className="search-bar" onClick={() => navigate("/products")}>
-          <i
-            class="fa-solid fa-magnifying-glass"
-            style={{ color: "#98999a" }}
-          ></i>
-          <input
-            placeholder="Search"
-            value={filterState.search}
-            onChange={(e) => {
-              filterDispatch({
-                type: "filter_by_search",
-                payload: e.target.value,
-              });
-            }}
-          />
         </div>
       </div>
     </>
